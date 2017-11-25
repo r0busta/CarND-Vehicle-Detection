@@ -91,18 +91,24 @@ Here's a [link to my video result](./video_output/project_video.mp4) (same [on Y
 
 *2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.*
 
-I recorded the positions of positive detections in each combination of 2 consecutive frames of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in a 6 frames window. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
 Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-Here are 2 frames and their corresponding heatmap, labels and detection windows:
+Here are 6 frames and their corresponding heatmap:
 
 ![alt text][image6]
+
+Resulting `scipy.ndimage.measurements.label()` labels and detection bounding boxes:
+
+![alt text][image7]
 
 ### Discussion
 
 *1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?*
 
-Though, the SVC classifier performs reasonably well, it tends to underfit. It's clearly visible on the project video, that it has many false positives (detects trees).
-To eliminate underfitting, we could try to train classifier on a larger data set.
+Though, the SVC classifier performs reasonably well, it tends to overfit. It's clearly visible on the project video, that it has many false positives in complex conditions.
+To eliminate overfitting, we could try to train classifier on a larger data set or apply image pre-processing algorithms.
 To improve the detection pipeline, in general, we could try to use classifier ensembles, for example, or use much more sophisticated classifiers as convolution neural networks. 
+
+Another big disadvantage of the chosen naive approach, is a very low performance - the pipeline works at 0.04 FPS

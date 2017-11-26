@@ -18,8 +18,14 @@ The goals/steps of this project are the following:
 [image2]: ./images/not_cars.png
 [image3]: ./images/HOG_example.png
 [image4]: ./images/sliding_windows.png
-[image5]: ./images/sliding_window.png
-[image6]: ./images/heatmaps_labels_boxes.png
+[image5]: ./images/multiple_boxes.png
+[image6]: ./images/frame_heatmaps_1.png
+[image7]: ./images/frame_heatmaps_2.png
+[image8]: ./images/frame_heatmaps_3.png
+[image9]: ./images/frame_heatmaps_4.png
+[image10]: ./images/frame_heatmaps_5.png
+[image11]: ./images/frame_heatmaps_6.png
+[image12]: ./images/frames_window_labels.png
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -79,7 +85,7 @@ The `scale=1.5` and `cells_per_step=2` was showing the best prediction result an
 
 *2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?*
 
-Ultimately I searched on 1.5 scale using `HLS` 3-channel HOG features and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Ultimately I searched on scales `1`, `1.5` and `2`, using `HLS` 3-channel HOG and color features in the feature vector, which provided a nice result.  Here is some example image:
 
 ![alt text][image5]
 
@@ -87,21 +93,24 @@ Ultimately I searched on 1.5 scale using `HLS` 3-channel HOG features and histog
 
 *1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)*
 
-Here's a [link to my video result](./video_output/project_video.mp4) (same [on YouTube](https://youtu.be/KewlYXOD9No))
+Here's a [link to my video result](./video_output/project_video.mp4) (same [on YouTube](https://youtu.be/JWdr5NQNEwg))
 
 *2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.*
 
-I recorded the positions of positive detections in a 6 frames window. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+I recorded the positions of positive detections in a set of frames. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-Here are 6 frames and their corresponding heatmap:
+Here's an example result showing heatmaps of a series of frames, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
 ![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
+![alt text][image10]
+![alt text][image11]
 
 Resulting `scipy.ndimage.measurements.label()` labels and detection bounding boxes:
 
-![alt text][image7]
+![alt text][image12]
 
 ### Discussion
 

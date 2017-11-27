@@ -93,7 +93,7 @@ Ultimately I searched on scales `1`, `1.5` and `2`, using `HLS` 3-channel HOG an
 
 *1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)*
 
-Here's a [link to my video result](./video_output/project_video.mp4) (same [on YouTube](https://youtu.be/KjeggkXVlnA))
+Here's a [link to my video result](./video_output/project_video.mp4) (the same [on YouTube](https://youtu.be/HIBZFCCdSLY))
 
 *2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.*
 
@@ -120,4 +120,4 @@ Though, the SVC classifier performs reasonably well, it tends to overfit. It's c
 To eliminate overfitting, we could try to train classifier on a larger data set or apply image pre-processing algorithms.
 To improve the detection pipeline, in general, we could try to use classifier ensembles, for example, or use much more sophisticated classifiers as convolution neural networks. 
 
-Another big disadvantage of the chosen naive approach, is a very low performance - the pipeline works at 0.04 FPS
+Another big disadvantage of the chosen naive approach, is a very low performance - the pipeline works at 0.4 FPS

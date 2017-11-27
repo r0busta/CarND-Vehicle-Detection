@@ -34,3 +34,9 @@ def color_hist(img, nbins=32):
     # Return the individual histograms, bin_centers and feature vector
     return hist_features
 
+
+def moving_avg(curr_avg, val, samples_count):
+    res = curr_avg
+    res -= res / samples_count
+    res += val / samples_count
+    return res
